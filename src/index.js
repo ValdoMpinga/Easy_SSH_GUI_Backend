@@ -1,6 +1,10 @@
 require('dotenv').config();
 
 const app = require('express')();
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser')
+mongoose.connect("mongodb://localhost/EasySSH_DB");
+
 
 //routes
 
@@ -13,6 +17,7 @@ const serverConfigRouter = require('./api/routes/ServerConfig/serverConfig')
 const cors = require('cors')
 
 app.use(cors())
+app.use(bodyParser.json())
 
 app.listen
     (
