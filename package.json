@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "devStart": "nodemon ./src/index.js",
-    "test": "mocha"
+    "test": "mocha --timeout 1000000"
   },
   "author": "Valdo e Mauro",
   "license": "ISC",
@@ -22,6 +22,7 @@
     "mongoose": "^6.3.3",
     "mongoose-validator": "^2.1.0",
     "node-ssh": "^12.0.4",
+    "react-router-dom": "^6.3.0",
     "ssh2shell": "^1.9.10",
     "uuid": "^8.3.2"
   }

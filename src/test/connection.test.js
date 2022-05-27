@@ -2,7 +2,7 @@ var SSH2Shell = require('ssh2shell')
 
 const host = {
     server: {
-        host: "192.168.1.254",
+        host: "192.168.1.221",
         userName: "osboxes",
         password: "osboxes.org",
     },

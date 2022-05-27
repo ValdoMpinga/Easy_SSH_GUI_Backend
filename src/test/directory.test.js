@@ -1,4 +1,3 @@
-const SSH2Shell = require('ssh2shell')
 describe('ssh directory CRUD test', function ()
 {
     it.skip('directory creation', function ()
@@ -25,69 +24,45 @@ describe('ssh directory CRUD test', function ()
 
 
 
-    it('directory list',async  function ()
+    it('directory list',  function ()
     {
         try
         {
-            connectionData = {
-                host: "192.168.1.7",
-                userName: "osboxes",
-                password: "osboxes.org",
-            }
-
             let commands = []
             commands.push("dir")
+            commands.push("ls -la")
 
-            host = commandsInitializer(connectionData, commands)
-
-      
-            SSH = new SSH2Shell(host),
-                callback =  function (sessionText)
+            var host =
+            {
+                server:
                 {
-                    console.log(sessionText)
+                    host: "192.168.1.7",
+                    userName: "osboxes",
+                    password: "osboxes.org",
+                },
+                commands: commands
+            }
+
+            var SSH2Shell = require('ssh2shell'),
+                SSH = new SSH2Shell(host)
+            
+                callback =  (sessionText) =>
+                {
+                    // console.log("text bellow : ");
+                    console.log(sessionText); 
                     return sessionText
                 }
 
-            function callConnection()
-            {
-                SSH.connect(callback);
-            }
-           
-            
-            function promisify(func)
-            {
-                return function ()
-                {
-                    return new Promise((resolve, reject) =>
-                    {
-                        try
-                        {
-                            func(resolve)
-                        } catch (e)
-                        {
-                            reject(e)
-                        }
-                    })
-                    }
-            }
-            
-            const promesified = promisify(callConnection())
-            promesified().then(res => console.log(res))
-            let a = await promesified()
-            console.log(a);
-            console.log("Ola");
+            let output = await SSH.connect(callback)
 
-    
+            console.log("Butterflies");
+
         } catch (e)
         {
             console.log("Error bellow");
             console.log(e);
         }
-        connectionData = {
-            host: "192.168.1.254",
-            userName: "osboxes",
-            password: "osboxes.org",
-        }
+
 
     });
 
@@ -146,7 +121,62 @@ function commandsInitializer(connectionData, commandsList)
             userName: connectionData.userName,
             password: connectionData.password,
         },
-        commands: commandsList
+        commands: commandsList,
+        onEnd: function (sessionText, sshObj)
+        {
+            deffered.resolve(sessionText)
+        }
     };
     return host
 }
+
+async function textReturn()
+{
+    try
+    {
+        let commands = []
+        commands.push("dir")
+        commands.push("ls -la")
+
+        var host =
+        {
+            server:
+            {
+                host: "192.168.1.7",
+                userName: "osboxes",
+                password: "osboxes.org",
+            },
+            commands: commands
+        }
+
+        var sessionText
+        var SSH2Shell = require('ssh2shell'),
+            SSH = new SSH2Shell(host),
+            callback = async (st) =>
+            {
+                // console.log("text bellow : ");
+                sessionText = await st
+                console.log(st); 
+                console.log(sessionText); 
+                return st
+            }
+
+        SSH.connect(callback);
+
+        console.log("-> " + sessionText);
+        console.log("HELOOO");
+
+
+        // let output = await SSH.connect(callback)
+        // SSH.pipe(sessionText)
+        // console.log(sessionText);
+        // return sessionText
+
+        // console.log("Butterflies");
+
+    } catch (e)
+    {
+        console.log("Error bellow");
+        console.log(e);
+    }
+} 
