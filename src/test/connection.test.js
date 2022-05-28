@@ -1,8 +1,10 @@
-var SSH2Shell = require('ssh2shell')
+const SSH2Shell = require('ssh2shell')
 
-const host = {
-    server: {
-        host: "192.168.1.221",
+const host =
+{
+    server:
+    {
+        host: "172.16.176.21",
         userName: "osboxes",
         password: "osboxes.org",
     },

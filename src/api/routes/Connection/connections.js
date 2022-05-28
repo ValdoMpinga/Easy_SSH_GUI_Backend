@@ -3,7 +3,7 @@
 const hostController = require('../../controllers/Database/host.contoller')
 const express = require("express");
 const fs = require('fs');
-const { log } = require('console');
+const SSH2Shell = require('ssh2shell')
 
 let router = express.Router();
 
@@ -24,8 +24,7 @@ router.route('/insert').post(async (request, response) =>
 {
     try
     {
-        let commands = []
-        commands.push("dir")
+        let commands = ["dir"]
         let output = null
         let hostObject = {
             ip: request.body.ip,
@@ -48,18 +47,15 @@ router.route('/insert').post(async (request, response) =>
         console.log(host);
 
 
-        var SSH2Shell = require('ssh2shell'),
-            SSH = new SSH2Shell(host)
+
+        let SSH = new SSH2Shell(host)
 
         let callback = async (sessionText) =>
         {
-            fs.writeFile('./file.txt', sessionText, (err) =>
-            {
                 output = sessionText
                 console.log("Session text: " + sessionText);
                 if (output == null)
                     return response.status(500).send("Error inserting host")
-            });
         }
 
         await SSH.connect(callback)
@@ -106,8 +102,7 @@ router.route('/update').post(async (request, response) =>
 
     try
     {
-        let commands = []
-        commands.push("dir")
+        let commands = ["dir"]
         let output = null
         let hostObject = {
             _id: request.body._id,
@@ -131,8 +126,8 @@ router.route('/update').post(async (request, response) =>
         console.log(host);
 
 
-        var SSH2Shell = require('ssh2shell'),
-            SSH = new SSH2Shell(host)
+
+        let SSH = new SSH2Shell(host)
 
         let callback = async (sessionText) =>
         {
@@ -173,7 +168,7 @@ router.route('/update').post(async (request, response) =>
                     response.status(500).send("Error updating host")
                 }
             }
-        }, 3000)
+        }, 4000)
 
     }
     catch (e)
@@ -183,7 +178,6 @@ router.route('/update').post(async (request, response) =>
         response.status(500).send("Error updating host")
     }
 })
-    
 
 router.route('/delete').post(async (request, response) =>
 {
