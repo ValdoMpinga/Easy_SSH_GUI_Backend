@@ -3,7 +3,7 @@ require('dotenv').config();
 const app = require('express')();
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser')
-mongoose.connect("mongodb://localhost/EasySSH_DB",
+mongoose.connect("mongodb://localhost/easySSH_DB",
     {
         autoIndex: true, 
     });
