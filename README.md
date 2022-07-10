@@ -10,3 +10,7 @@
 
 The core of Easy SSH is <a href="https://www.npmjs.com/package/ssh2shell">ssh2shell</a> , which is a library built on coffee scripts for Node.js that allows
 you to make connections to one or more machines and execute multiple commands sequentially and, if necessary, execute them based on previously executed commands.
+
+# Architecture
+
+![arch](https://user-images.githubusercontent.com/76015450/178143093-0bb96b57-0ae5-4797-b7d0-52e3a90690c1.png)
