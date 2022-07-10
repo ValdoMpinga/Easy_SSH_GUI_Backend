@@ -16,3 +16,6 @@ you to make connections to one or more machines and execute multiple commands se
 # Architecture
 
 ![arch](https://user-images.githubusercontent.com/76015450/178143093-0bb96b57-0ae5-4797-b7d0-52e3a90690c1.png)
+
+
+#Frontend: <a href="https://github.com/ValdoMpinga/Easy_SSH_GUI_Frontend">ssh2shell</a>
