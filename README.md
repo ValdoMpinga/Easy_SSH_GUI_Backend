@@ -31,4 +31,4 @@ you to make connections to one or more machines and execute multiple commands se
 
 <br/>
 
-### Frontend: <a href="https://github.com/ValdoMpinga/Easy_SSH_GUI_Frontend">ssh2shell</a>
+### Frontend: <a href="https://github.com/ValdoMpinga/Easy_SSH_GUI_Frontend">link</a>
